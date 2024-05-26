@@ -1,0 +1,74 @@
+@mixin create-space {
+  @for $index from 0 through 25 {
+    $spacer: 4px;
+    $spacing: $index * $spacer;
+
+    .p-#{$index} {
+      padding: $spacing;
+    }
+
+    .px-#{$index} {
+      padding-inline: $spacing;
+    }
+
+    .py-#{$index} {
+      padding-block: $spacing;
+    }
+
+    .pt-#{$index} {
+      padding-top: $spacing;
+    }
+
+    .pe-#{$index} {
+      padding-right: $spacing;
+    }
+
+    .pb-#{$index} {
+      padding-bottom: $spacing;
+    }
+
+    .ps-#{$index} {
+      padding-left: $spacing;
+    }
+
+    .m-#{$index} {
+      margin: $spacing;
+    }
+
+    .mx-#{$index} {
+      margin-inline: $spacing;
+    }
+
+    .my-#{$index} {
+      margin-block: $spacing;
+    }
+
+    .mt-#{$index} {
+      margin-top: $spacing;
+    }
+
+    .me-#{$index} {
+      margin-right: $spacing;
+    }
+
+    .mb-#{$index} {
+      margin-bottom: $spacing;
+    }
+
+    .ms-#{$index} {
+      margin-left: $spacing;
+    }
+
+    .gap-#{$index} {
+      gap: $spacing;
+    }
+
+    .gapx-#{$index} {
+      column-gap: $spacing;
+    }
+
+    .gapy-#{$index} {
+      row-gap: $spacing;
+    }
+  }
+}

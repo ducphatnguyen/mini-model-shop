@@ -1,0 +1,241 @@
+.container {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 96px 80px;
+
+  margin-block: 276px 138px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image: url("../../assets/images/bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    opacity: 0.5;
+    z-index: -1;
+  }
+}
+
+.shop-by-models {
+  display: flex;
+  height: 690px;
+
+  overflow: hidden;
+  // Header
+  &__header {
+    flex-basis: 1028px;
+
+    display: flex;
+    justify-content: center;
+
+    font-size: 72px;
+    font-weight: 900;
+  }
+  &__title {
+    padding: 0 16px;
+  }
+
+  // Main
+  &__graphics {
+    flex-basis: 680px;
+  }
+
+  &__circle-container {
+    width: 100%;
+    position: relative;
+  }
+
+  &__svg {
+    position: absolute;
+    top: 150px;
+    left: 500px;
+
+    // transform: rotate(-15deg);
+
+    opacity: 0;
+    visibility: visible;
+    &--active {
+      top: 42px;
+      left: 120px;
+      //  transform: rotate(-45deg);
+
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &__circle {
+    position: absolute;
+
+    margin-top: 88px;
+
+    width: 580px;
+    height: 580px;
+
+    border-radius: 50%;
+
+    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0);
+
+    &--orange {
+      background-color: rgba(237, 87, 0, 1);
+    }
+    &--pink {
+      background-color: rgba(241, 131, 178, 1);
+    }
+    &--green {
+      background-color: rgba(187, 215, 128, 1);
+    }
+    &--blue {
+      background-color: rgba(87, 196, 229, 1);
+    }
+    &--purple {
+      background-color: rgba(100, 25, 120, 1);
+    }
+    &--red {
+      background-color: rgba(230, 0, 29, 1);
+    }
+
+    &--active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+  }
+
+  &__carrousel {
+    position: relative;
+    height: 100%;
+
+    .carousel {
+      &__button {
+        cursor: pointer;
+
+        position: absolute;
+        z-index: 2;
+
+        padding: 18px 24px;
+
+        border: none;
+        border-radius: 50%;
+
+        &--prev {
+          top: 50%;
+          // right: 500px;
+          background-color: rgba(38, 38, 38, 1);
+          color: rgba(255, 255, 255, 1);
+        }
+        &--next {
+          top: 50%;
+          right: 400px;
+        }
+      }
+
+      &__slides {
+        position: absolute;
+        top: 220px;
+        right: 150px;
+
+        display: flex;
+        align-items: center;
+        gap: 360px;
+
+        &--active {
+          transition: transform 0.5s ease-in-out;
+        }
+      }
+
+      &__image {
+        transition: transform 0.5s ease-in-out;
+
+        &--active {
+          transform: scale(1.4);
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 20px;
+  .progress {
+    &__container {
+      flex-basis: 50%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__position {
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    &-bar {
+      padding-right: 160px;
+      margin: 0 8px;
+
+      background-color: rgba(77, 77, 77, 0.3);
+      &__fill {
+        width: 32px;
+        height: 2px;
+        background-color: rgba(38, 38, 38, 1);
+      }
+    }
+  }
+}
+
+.btn {
+  &__group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 248px;
+  height: 52px;
+
+  border: 1px solid rgba(38, 38, 38, 1);
+  border-radius: 100px;
+  background-color: transparent;
+
+  color: rgba(0, 0, 0, 1);
+  font-size: 18px;
+
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: rgba(38, 38, 38, 1);
+    color: rgba(255, 255, 255, 1);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .shop-by-models {
+    display: block;
+  }
+
+  .footer {
+    margin-top: 100px;
+  }
+}

@@ -1,0 +1,76 @@
+@import "../variables/screen";
+@import "../variables/grid";
+
+@mixin flex-size($size) {
+  -ms-flex: 0 0 $size;
+  flex: 0 0 $size;
+  max-width: $size;
+}
+
+@mixin render-grid($screen-type: "") {
+  @for $index from 1 to $number-of-column {
+    $dash: "-";
+    @if ($screen-type == "") {
+      $dash: "";
+    }
+
+    .row-cols#{$dash}#{$screen-type}-#{$index} > * {
+      @include flex-size(calc(100% / $index));
+    }
+    .col#{$dash}#{$screen-type}-#{$index} {
+      @include flex-size(calc($index / $number-of-column * 100%));
+    }
+    .order#{$dash}#{$screen-type}-#{$index} {
+      -ms-flex-order: $index;
+      order: $index;
+    }
+    .offset#{$dash}#{$screen-type}-#{$index} {
+      margin-left: calc($index / $number-of-column * 100%);
+    }
+  }
+}
+
+@mixin create-grid($screen-list) {
+  .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .col {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  .col-auto {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .order-first {
+    -ms-flex-order: -1;
+    order: -1;
+  }
+
+  .order-last {
+    -ms-flex-order: $number-of-column + 1;
+    order: $number-of-column + 1;
+  }
+
+  .order-0 {
+    -ms-flex-order: 0;
+    order: 0;
+  }
+  @include render-grid;
+  @each $screen-type, $screen-value in $screen-list {
+    @media (min-width: $screen-value) {
+      @include render-grid($screen-type);
+    }
+  }
+}

@@ -1,0 +1,50 @@
+[
+    {
+      "id": 1,
+      "code": "mini-3-door-hatch",
+      "image": "https://s3-alpha-sig.figma.com/img/f758/0b8e/efcd470d4b4bd6fdda25277a32a3bcc6?Expires=1717372800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=E6Uzx6hDk3UZomI8fj4Jr17b9rc74z~uxYqIw5wN0EY24WANFpHrk668WoiE8GiJVDCCXbUs7Os0xdo3hR69Hy9x893FMYRb-O034vfmLezMNjWrBtLx8kZs0Ht~mF672YGzKmPlCQRrxOZRL66T~5NdRIQZcCR-9nMdB9z4DNVsAb~nO~Hh55Zbwt9pbgZZr6vxcWWYVfHL82mwmCCIqzDByon9IBFpZwr7obTMdmbWnaCc7lWUW8-o3OdLQAyUchk-iDfaIMf0IAXTjuQdIkThzr1-cN9KHWVEGwHHHPUTPSlhhFsT2i44R5gXEn8a4apYM0OW9IswRNcZw4VR1g__",
+      "background": "#ED5700",
+      "name": "MINI 3-DOOR HATCH",
+      "color": "#123F94"
+    },
+    {
+      "id": 2,
+      "code": "mini-5-door-hatch",
+      "image": "https://s3-alpha-sig.figma.com/img/7387/8d60/7a60bc5477ad865d8a6bebac4380ebf4?Expires=1717372800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=N5y3-jANh2jEHp49Ac3iM~GE4DWyZ541aXg91uMtiUAtSpAGRZxCsV2bUKJgomL1Q7wVyOLPdXwix6VAMjfyNKG9OyvRIiGAi2yq8hGw8aLedJ4GTgAjx2ioEjeCwTWqP-geaCdH136g-edTQGOD5Dq9uH5pIqxYu2DedMBprLip0C-OH3hv6bVZHOCx9dS6-WBQg0gPfGYZzDi1YQh4HNZAIBUDNdWf258TaD4zspVX7J7-IOKl5--sCDKScui1VEBnd8aj-JquHhfp7We---qpG3aXzCkeitsBpUth1XMjz78UNLB2-1CMgM~j5b0Fy3xCm4DKAhtLJ2h9rPBuzw__",
+      "background": "#F183B2",
+      "name": "MINI 5-DOOR HATCH",
+      "color": "#006F2B"
+    },
+    {
+      "id": 3,
+      "code": "mini-countryman",
+      "image": "https://s3-alpha-sig.figma.com/img/0e6b/a01d/5f3576b6f755cebc88498bd9ba1483ed?Expires=1717372800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=juTrDvJd3CZNEo3IK6-zb0HX6fiirhZuvfGp6Q5dgpzATB69gUF5NsBShs2jvAVBL-hC-uLjoG5sBUukzQcbeJy8CbbHBsG5LapoOOnhCriUOFcqckxaSsAF0UT-79uaPG0j~b8ap3Z1A2rkMslE0pnjPRkZFjXjEjk7DMde9cKXs-m2mTkpVazUsE2tgxxhdQH0uTml1HdjwF7u4cR~qYMGHW9ZpODg8b50hi98BfSDhpxXyd5mxyYIlA-p3j44Bk5mAkryAveCNVsTefD3k4feq8loZ~pkx0M5JHS5sc~I73JgZNFrtaud64gHoO7MxfGZi5hPKVP6VvokABLNQQ__",
+      "background": "#BBD780",
+      "name": "MINI COUNTRYMAN",
+      "color": "#582216"
+    },
+    {
+      "id": 4,
+      "code": "mini-clubman",
+      "image": "https://s3-alpha-sig.figma.com/img/5b4d/c717/e04c029009c0a052d0cfde1a5ff96e37?Expires=1717372800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XqQTVn1obQn71YKNsJSO81fobvU4ATStKpwjhHcuGEmfbb45Zy5Fjv31ObAKQbQJ3oi~BgKZ-3Fp78G3oeQTn79~UezMJ8GUtEvcVcdrQHzGuZ0yD3yDh1lDzZk5WlEfX3QSOsjAm~aqNnjJXcfdNeh1uo4r~y75E1L7GlkYNcmeKcqd~PyzGRg8ZvXnyL6hMbsHcJGcMkAIFS5Y7TjIXVs2ZRPX0J41lVQPgq4BesN~BLwW1cco~4hrqoPTiea7PlCL2F4H2bozGnijoqSFn8yUBi4O~r4QUFTHyHOMjKG43xXdZ1zzR3KzlVpmQGDEOPWRvPYlgwwNNS8ElBVeZw__",
+      "background": "#57C4E5",
+      "name": "MINI CLUBMAN",
+      "color": "#E6001D"
+    },
+    {
+      "id": 5,
+      "code": "mini-convertible",
+      "image": "https://s3-alpha-sig.figma.com/img/e86c/c67b/fd43209923640d8dedc882760bfb1cf9?Expires=1717372800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZUv2vlXMoezJec6TF7aYqBR2BpUoCg-Bh02-NjU7DcdbdU09MlxdPbOPX7aMmC-vpEl2FMLrpO5PmDq4k1hMZX4QcHRSB5p61V6JVGYp4hgZv3ScaAg-ftUGGQhzsYF5ANDjLhdjoWNy6pLbXPEH~yesqehPH6Eeu~GBW098nuViuCcDdqOgYlAaJ431f58CxZHU~8BqRdfzHCjY1yyBBQqjDjyBcaukkP2W3WGdSvW0TaUw-M4LR6vcqW4H~uz7hnI5RguT~ZXRGaQ~7HAX7IfNGnQ29ZepxZQQG1-dXiPNrLWu9O6QR2gxMb3VlSfk27wyrf-CQ0jyihXAHhJW4w__",
+      "background": "#641978",
+      "name": "MINI CONVERTIBLE",
+      "color": "#57C4E5"
+    },
+    {
+      "id": 6,
+      "code": "mini-john-cooper-work",
+      "image": "https://s3-alpha-sig.figma.com/img/08cc/8257/344c42f0d8a99ec52147e7c27ff4b3dc?Expires=1717372800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=L9SMHIewuyONejduNr7xGzWX1u8debKfQsK4PVIsKq5i0W0syy2Ik6DQ2ug0GLkYLR1N52g0S-t-4JMqsAeYy-AiTYwcpvwAx~8n9C3XTVXDgX5QOeSrlbmFhd6mOYwAwLlMI8chmHZF5QSdGlaQGTkBJMC-8SVktJ67ErgwMXgkw1R8dEP3iIhp9Wf~iw5Ua7fx7dUMalVkqseefJ2G37u40OTwZZvoppg5pJwQwnoEBJpfdy1DASL36fPGK2Bb2WErYmN3fK93RvXZwsEEyILngcornHah~J7h1l3PKOyTmz-R7RB-E19soh3zFTy5-PhMYeh78QmDuJqTPi6ETQ__",
+      "background": "#E6001D",
+      "name": "JOHN COOPER WORKS",
+      "color": "#000000"
+    }
+  ]

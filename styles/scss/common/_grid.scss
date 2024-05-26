@@ -1,0 +1,13 @@
+@import "../variables/screen";
+@import "../mixins/grid";
+
+$screenList: (
+  sm: $sm,
+  md: $md,
+  lg: $lg,
+  xl: $xl,
+);
+
+@include create-grid($screenList);
+
+
