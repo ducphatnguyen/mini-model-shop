@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Get documents
+  // Get elements
   const circles = Array.from(
     document.querySelectorAll(".shop-by-models__circle")
   );
-
   const slidesContainer = document.querySelector(".carousel__slides");
   const prevButton = document.querySelector(".carousel__button--prev");
   const nextButton = document.querySelector(".carousel__button--next");
@@ -26,53 +25,25 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
   let isTransitioning = false;
   let previousDisplayIndex = 0;
-  let isTheFirstRendering = true;
+  let isFirstRendering = true;
 
-  // Animations
-  const fadeIn = (element, duration) => {
-    const interval = 100;
-    const steps = duration / interval;
+  // Utility functions
+  const fade = (element, duration, fadeIn = true) => {
+    const steps = duration / 100;
     const deltaOpacity = 1 / steps;
+    let opacity = fadeIn ? 0 : 1;
 
-    let opacity = 0;
-    let step = 0;
-
-    const fade = () => {
-      if (step < steps) {
-        opacity += deltaOpacity;
-        element.style.opacity = opacity;
-        step++;
-        setTimeout(fade, interval);
-      } else {
-        element.style.opacity = 1;
+    const updateOpacity = () => {
+      opacity += fadeIn ? deltaOpacity : -deltaOpacity;
+      element.style.opacity = Math.max(0, Math.min(1, opacity));
+      if ((fadeIn && opacity < 1) || (!fadeIn && opacity > 0)) {
+        setTimeout(updateOpacity, 100);
       }
     };
 
-    fade();
+    updateOpacity();
   };
 
-  const fadeOut = (element, duration) => {
-    const interval = 100;
-    const steps = duration / interval;
-    const deltaOpacity = 1 / steps;
-
-    let opacity = 1;
-    let step = 0;
-
-    const fade = () => {
-      if (step < steps) {
-        opacity -= deltaOpacity;
-        element.style.opacity = opacity;
-        step++;
-        setTimeout(fade, interval);
-      } else {
-        element.style.opacity = 0;
-      }
-    };
-    fade();
-  };
-
-  // Methods
   const cloneSlides = (start, end) => {
     const slides = Array.from(slidesContainer.children).slice(start, end);
     slides
@@ -80,21 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
       .forEach((slide) => slidesContainer.prepend(slide.cloneNode(true)));
   };
 
-  const handleSlideCloning = () => {
-    cloneSlides(0, slidesContainer.childElementCount - slidesToShow);
-  };
-
-  const removeLastSlides = () => {
+  const removeClonedSlides = () => {
     const slidesToRemove = Array.from(slidesContainer.children).slice(
       -initialChildren
     );
-    slidesToRemove.forEach((slide) => {
-      slidesContainer.removeChild(slide);
-    });
+    slidesToRemove.forEach((slide) => slidesContainer.removeChild(slide));
   };
 
   const updateProgressBar = (displayIndex) => {
-    fadeIn(currentProgressSpan, 100);
+    fade(currentProgressSpan, 100);
     currentProgressSpan.textContent = displayIndex;
     progressBarFill.style.width = `calc(100% * ${displayIndex} / ${initialChildren})`;
 
@@ -110,10 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
       currentIndex !== 0 && currentIndex % initialChildren === 0;
 
     if (prevButton.disabled) {
-      isTheFirstRendering = false;
-      handleSlideCloning();
+      isFirstRendering = false;
+      cloneSlides(0, slidesContainer.childElementCount - slidesToShow);
       setTimeout(() => {
-        removeLastSlides();
+        removeClonedSlides();
         slidesContainer.style.transition = "none";
         slidesContainer.style.transform = "translateX(0px)";
         currentIndex = 0;
@@ -127,29 +92,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const updateProgressStyles = () => {
+  const updateProgressStyles = (direction) => {
     if (currentIndex % initialChildren === initialChildren - 1) {
       currentProgressSpan.classList.add("progress__position-current--max");
-      fadeIn(totalProgressSpan, 200);
-      fadeOut(previousProgressSpan, 500);
-    } else if (currentIndex % initialChildren === 0 && isTheFirstRendering === false) {
+      fade(totalProgressSpan, 200);
+      fade(previousProgressSpan, 500, false);
+    } else if (
+      direction === 1 &&
+      currentIndex % initialChildren === 0 &&
+      !isFirstRendering
+    ) {
       totalProgressSpan.classList.add("progress__position-total--min");
-      fadeIn(currentProgressSpan, 500);
+      fade(currentProgressSpan, 500);
+      previousProgressSpan.textContent = initialChildren;
       previousProgressSpan.classList.add("progress__position-previous--min");
-      fadeIn(previousProgressSpan, 500);
-      fadeOut(previousProgressSpan, 500);
+      fade(previousProgressSpan, 500);
+      fade(previousProgressSpan, 500, false);
     } else {
       previousProgressSpan.classList.remove("progress__position-previous--min");
       currentProgressSpan.classList.remove("progress__position-current--max");
       totalProgressSpan.classList.remove("progress__position-total--min");
-      fadeOut(previousProgressSpan, 500);
-      // Reset
-      totalProgressSpan.style.transform = "";
-      previousProgressSpan.style.transform = "";
+      fade(previousProgressSpan, 500, false);
     }
   };
 
-  const updateSlides = () => {
+  const updateSlides = (direction) => {
     const slideWidth = slidesContainer.firstElementChild.clientWidth;
     const offset = (slideWidth + gap) * currentIndex;
     slidesContainer.style.transform = `translateX(${offset}px)`;
@@ -158,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateProgressBar(displayIndex);
     handleButtonStates();
-    updateProgressStyles();
+    updateProgressStyles(direction);
   };
 
   const updateCircleGraph = (direction) => {
@@ -194,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!isTransitioning) {
       isTransitioning = true;
       currentIndex += direction;
-      updateSlides();
+      updateSlides(direction);
       updateCircleGraph(direction);
       updateSlideActivation();
     }
@@ -212,6 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize Carousel
   slidesContainer.classList.add("carousel__slides--active");
   cloneSlides(-slidesToShow, slidesContainer.childElementCount);
-  updateSlides();
+  updateSlides(1); // Initialize with direction 1
   updateSlideActivation();
 });

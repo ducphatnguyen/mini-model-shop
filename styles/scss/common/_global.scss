@@ -55,7 +55,6 @@
     position: absolute;
     top: 150px;
     left: 500px;
-
     // transform: rotate(-15deg);
 
     opacity: 0;
@@ -213,8 +212,6 @@
         &--min {
           left: unset;
           right: -18px;
-          // transform: translateX(216px);
-          // transition: transform 0.8s ease-in-out;
         }
       }
 
