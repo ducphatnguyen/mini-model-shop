@@ -1,26 +1,76 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Circle Graph
+  // Get documents
   const circles = Array.from(
     document.querySelectorAll(".shop-by-models__circle")
   );
 
-  // Carousel
   const slidesContainer = document.querySelector(".carousel__slides");
   const prevButton = document.querySelector(".carousel__button--prev");
   const nextButton = document.querySelector(".carousel__button--next");
 
-  // Progress Bar
-  const currentProgressSpan = document.querySelector(
-    ".progress__position--current"
+  const previousProgressSpan = document.querySelector(
+    ".progress__position-previous"
   );
+  const currentProgressSpan = document.querySelector(
+    ".progress__position-current"
+  );
+  const totalProgressSpan = document.querySelector(".progress__position-total");
+  const progressBarFill = document.querySelector(".progress-bar__fill");
 
   // Data
   const initialChildren = slidesContainer.childElementCount;
   const slidesToShow = 2;
   const gap = parseInt(getComputedStyle(slidesContainer).gap);
+  totalProgressSpan.textContent = initialChildren;
 
   let currentIndex = 0;
   let isTransitioning = false;
+  let previousDisplayIndex = 0;
+  let isTheFirstRendering = true;
+
+  // Animations
+  const fadeIn = (element, duration) => {
+    const interval = 100;
+    const steps = duration / interval;
+    const deltaOpacity = 1 / steps;
+
+    let opacity = 0;
+    let step = 0;
+
+    const fade = () => {
+      if (step < steps) {
+        opacity += deltaOpacity;
+        element.style.opacity = opacity;
+        step++;
+        setTimeout(fade, interval);
+      } else {
+        element.style.opacity = 1;
+      }
+    };
+
+    fade();
+  };
+
+  const fadeOut = (element, duration) => {
+    const interval = 100;
+    const steps = duration / interval;
+    const deltaOpacity = 1 / steps;
+
+    let opacity = 1;
+    let step = 0;
+
+    const fade = () => {
+      if (step < steps) {
+        opacity -= deltaOpacity;
+        element.style.opacity = opacity;
+        step++;
+        setTimeout(fade, interval);
+      } else {
+        element.style.opacity = 0;
+      }
+    };
+    fade();
+  };
 
   // Methods
   const cloneSlides = (start, end) => {
@@ -30,19 +80,37 @@ document.addEventListener("DOMContentLoaded", () => {
       .forEach((slide) => slidesContainer.prepend(slide.cloneNode(true)));
   };
 
-  const updateSlides = () => {
-    const slideWidth = slidesContainer.firstElementChild.clientWidth;
-    const offset = (slideWidth + gap) * currentIndex;
-    slidesContainer.style.transform = `translateX(${offset}px)`;
+  const handleSlideCloning = () => {
+    cloneSlides(0, slidesContainer.childElementCount - slidesToShow);
+  };
 
-    const displayIndex = (currentIndex % initialChildren) + 1;
+  const removeLastSlides = () => {
+    const slidesToRemove = Array.from(slidesContainer.children).slice(
+      -initialChildren
+    );
+    slidesToRemove.forEach((slide) => {
+      slidesContainer.removeChild(slide);
+    });
+  };
+
+  const updateProgressBar = (displayIndex) => {
+    fadeIn(currentProgressSpan, 100);
     currentProgressSpan.textContent = displayIndex;
+    progressBarFill.style.width = `calc(100% * ${displayIndex} / ${initialChildren})`;
 
+    if (previousDisplayIndex !== 0) {
+      previousProgressSpan.textContent = previousDisplayIndex;
+    }
+    previousDisplayIndex = displayIndex;
+  };
+
+  const handleButtonStates = () => {
     nextButton.disabled = currentIndex === 0;
     prevButton.disabled =
       currentIndex !== 0 && currentIndex % initialChildren === 0;
 
     if (prevButton.disabled) {
+      isTheFirstRendering = false;
       handleSlideCloning();
       setTimeout(() => {
         removeLastSlides();
@@ -59,17 +127,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const handleSlideCloning = () => {
-    cloneSlides(0, slidesContainer.childElementCount - slidesToShow);
+  const updateProgressStyles = () => {
+    if (currentIndex % initialChildren === initialChildren - 1) {
+      currentProgressSpan.classList.add("progress__position-current--max");
+      fadeIn(totalProgressSpan, 200);
+      fadeOut(previousProgressSpan, 500);
+    } else if (currentIndex % initialChildren === 0 && isTheFirstRendering === false) {
+      totalProgressSpan.classList.add("progress__position-total--min");
+      fadeIn(currentProgressSpan, 500);
+      previousProgressSpan.classList.add("progress__position-previous--min");
+      fadeIn(previousProgressSpan, 500);
+      fadeOut(previousProgressSpan, 500);
+    } else {
+      previousProgressSpan.classList.remove("progress__position-previous--min");
+      currentProgressSpan.classList.remove("progress__position-current--max");
+      totalProgressSpan.classList.remove("progress__position-total--min");
+      fadeOut(previousProgressSpan, 500);
+      // Reset
+      totalProgressSpan.style.transform = "";
+      previousProgressSpan.style.transform = "";
+    }
   };
 
-  const removeLastSlides = () => {
-    const slidesToRemove = Array.from(slidesContainer.children).slice(
-      -initialChildren
-    );
-    slidesToRemove.forEach((slide) => {
-      slidesContainer.removeChild(slide);
-    });
+  const updateSlides = () => {
+    const slideWidth = slidesContainer.firstElementChild.clientWidth;
+    const offset = (slideWidth + gap) * currentIndex;
+    slidesContainer.style.transform = `translateX(${offset}px)`;
+
+    const displayIndex = (currentIndex % initialChildren) + 1;
+
+    updateProgressBar(displayIndex);
+    handleButtonStates();
+    updateProgressStyles();
   };
 
   const updateCircleGraph = (direction) => {

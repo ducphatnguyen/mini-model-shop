@@ -1,3 +1,5 @@
+@import "../variables/colors";
+
 .container {
   position: relative;
 
@@ -25,8 +27,8 @@
 .shop-by-models {
   display: flex;
   height: 690px;
-
   overflow: hidden;
+
   // Header
   &__header {
     flex-basis: 1028px;
@@ -45,12 +47,10 @@
   &__graphics {
     flex-basis: 680px;
   }
-
   &__circle-container {
-    width: 100%;
     position: relative;
+    width: 100%;
   }
-
   &__svg {
     position: absolute;
     top: 150px;
@@ -87,22 +87,22 @@
     transform: scale(0);
 
     &--orange {
-      background-color: rgba(237, 87, 0, 1);
+      background-color: $color-orange;
     }
     &--pink {
-      background-color: rgba(241, 131, 178, 1);
+      background-color: $color-pink;
     }
     &--green {
-      background-color: rgba(187, 215, 128, 1);
+      background-color: $color-light-green;
     }
     &--blue {
-      background-color: rgba(87, 196, 229, 1);
+      background-color: $color-light-blue;
     }
     &--purple {
-      background-color: rgba(100, 25, 120, 1);
+      background-color: $color-purple;
     }
     &--red {
-      background-color: rgba(230, 0, 29, 1);
+      background-color: $color-red;
     }
 
     &--active {
@@ -123,16 +123,19 @@
         position: absolute;
         z-index: 2;
 
-        padding: 18px 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 14px 16px;
 
         border: none;
         border-radius: 50%;
 
         &--prev {
           top: 50%;
-          // right: 500px;
-          background-color: rgba(38, 38, 38, 1);
-          color: rgba(255, 255, 255, 1);
+          background-color: $color-gray-9;
+          color: $color-gray-1;
         }
         &--next {
           top: 50%;
@@ -167,33 +170,77 @@
 
 .footer {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-
-  gap: 20px;
+  gap: 100px;
+  font-family: "MINISansSerif-Regular";
   .progress {
     &__container {
-      flex-basis: 50%;
+      flex-basis: 40%;
 
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
+    &-bar {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+
+      width: 192px;
+
+      background-color: $color-gray-6;
+      &__fill {
+        height: 2px;
+        background-color: $color-gray-9;
+        transition: width 0.5s ease;
+      }
+    }
+
     &__position {
       font-size: 20px;
       line-height: 24px;
-    }
+      position: absolute;
 
-    &-bar {
-      padding-right: 160px;
-      margin: 0 8px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
 
-      background-color: rgba(77, 77, 77, 0.3);
-      &__fill {
-        width: 32px;
-        height: 2px;
-        background-color: rgba(38, 38, 38, 1);
+      &-previous {
+        left: -16px;
+        opacity: 1;
+
+        &--min {
+          left: unset;
+          right: -18px;
+          // transform: translateX(216px);
+          // transition: transform 0.8s ease-in-out;
+        }
+      }
+
+      &-current {
+        left: -16px;
+        opacity: 1;
+
+        &--max {
+          left: unset;
+          right: -18px;
+          transform: translateX(-216px);
+          transition: transform 0.5s ease-in-out;
+        }
+        
+      }
+
+      &-total {
+        right: -18px;
+        opacity: 1;
+
+        &--min {
+          right: unset;
+          left: -16px;
+          transform: translateX(216px);
+          transition: transform 0.5s ease-in-out;
+        }
       }
     }
   }
@@ -203,9 +250,9 @@
   &__group {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 24px;
   }
-
+  background-color: transparent;
   cursor: pointer;
 
   display: flex;
@@ -215,19 +262,19 @@
   width: 248px;
   height: 52px;
 
-  border: 1px solid rgba(38, 38, 38, 1);
+  border: 1px solid $color-gray-9;
   border-radius: 100px;
-  background-color: transparent;
 
-  color: rgba(0, 0, 0, 1);
+  color: $color-gray-10;
   font-size: 18px;
 
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    background-color: rgba(38, 38, 38, 1);
-    color: rgba(255, 255, 255, 1);
+    background-color: $color-gray-9;
+    color: $color-gray-1;
   }
+
 }
 
 @media screen and (max-width: 1200px) {
@@ -237,5 +284,22 @@
 
   .footer {
     margin-top: 100px;
+
+    justify-content: center;
   }
+
+  .btn {
+    &__group {
+      padding: 0;
+    }
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in-active {
+  opacity: 1;
 }
