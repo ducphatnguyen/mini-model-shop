@@ -184,19 +184,25 @@
         justify-content: center;
         align-items: center;
 
-        padding: 14px 16px;
+        padding: 16px;
 
         border: none;
         border-radius: 50%;
 
         &--prev {
           top: 50%;
+          left: -480px;
           background-color: $color-gray-9;
           color: $color-gray-1;
         }
         &--next {
           top: 50%;
-          right: 400px;
+          right: -80px;
+          background-color: $color-gray-6;
+          color: $color-gray-1;
+        }
+        &--disabled {
+          cursor: default;
         }
       }
 
@@ -212,6 +218,7 @@
         &--active {
           transition: transform 0.5s ease-in-out;
         }
+        
       }
 
       &__image {

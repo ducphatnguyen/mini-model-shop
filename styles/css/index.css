@@ -167,18 +167,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 14px 16px;
+  padding: 16px;
   border: none;
   border-radius: 50%;
 }
 .shop-by-models__carrousel .carousel__button--prev {
   top: 50%;
+  left: -480px;
   background-color: #262626;
   color: #FFFFFF;
 }
 .shop-by-models__carrousel .carousel__button--next {
   top: 50%;
-  right: 400px;
+  right: -80px;
+  background-color: rgba(77, 77, 77, 0.3019607843);
+  color: #FFFFFF;
+}
+.shop-by-models__carrousel .carousel__button--disabled {
+  cursor: default;
 }
 .shop-by-models__carrousel .carousel__slides {
   position: absolute;

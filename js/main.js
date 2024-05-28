@@ -84,9 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentIndex = 0;
         setTimeout(() => {
           slidesContainer.style.transition = "";
-          slidesContainer.classList.remove("carousel__slides--active");
           prevButton.disabled = false;
-          slidesContainer.classList.add("carousel__slides--active");
         }, 100);
       }, 2000);
     }
