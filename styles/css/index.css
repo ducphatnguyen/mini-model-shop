@@ -41,18 +41,62 @@
   position: relative;
   width: 100%;
 }
+@keyframes slideFromFirstToActive {
+  from {
+    top: 170px;
+    right: -72px;
+    transform: rotate(45deg);
+    opacity: 0;
+  }
+  to {
+    top: 46px;
+    right: -120px;
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+}
 .shop-by-models__svg {
   position: absolute;
-  top: 150px;
-  left: 500px;
   opacity: 0;
-  visibility: visible;
+  visibility: hidden;
+}
+.shop-by-models__svg--first {
+  top: 170px;
+  right: -72px;
+  transform: rotate(0deg);
+}
+.shop-by-models__svg--second {
+  top: -138px;
+  right: -400px;
+  transform: rotate(-32deg);
+}
+.shop-by-models__svg--third {
+  top: -115px;
+  right: -426px;
+  transform: rotate(-28deg);
+}
+.shop-by-models__svg--fourth {
+  top: 23px;
+  right: -502px;
+  transform: rotate(-11deg);
+}
+.shop-by-models__svg--fifth {
+  top: -107px;
+  right: -430px;
+  transform: rotate(-27deg);
+}
+.shop-by-models__svg--sixth {
+  top: -168px;
+  right: -368px;
+  transform: rotate(-38deg);
 }
 .shop-by-models__svg--active {
-  top: 42px;
-  left: 120px;
   opacity: 1;
   visibility: visible;
+  top: 46px;
+  right: -120px;
+  transform: rotate(0deg);
+  animation: slideFromFirstToActive 3.5s ease-in-out forwards;
 }
 .shop-by-models__circle {
   position: absolute;

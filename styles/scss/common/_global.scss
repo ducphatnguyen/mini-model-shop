@@ -47,26 +47,84 @@
   &__graphics {
     flex-basis: 680px;
   }
+
   &__circle-container {
     position: relative;
     width: 100%;
   }
+
+  @keyframes slideFromFirstToActive {
+    from {
+      top: 170px;
+      right: -72px;
+      transform: rotate(45deg);
+      opacity: 0;
+    }
+    to {
+      top: 46px;
+      right: -120px;
+      transform: rotate(0deg);
+      opacity: 1;
+    }
+  }
+
   &__svg {
     position: absolute;
-    top: 150px;
-    left: 500px;
-    // transform: rotate(-15deg);
-
     opacity: 0;
-    visibility: visible;
-    &--active {
-      top: 42px;
-      left: 120px;
-      //  transform: rotate(-45deg);
+    visibility: hidden;
 
+    &--first {
+      top: 170px;
+      right: -72px;
+      transform: rotate(0deg);
+    }
+
+    &--second {
+      top: -138px;
+      right: -400px;
+      transform: rotate(-32deg);
+    }
+
+    &--third {
+      top: -115px;
+      right: -426px;
+      transform: rotate(-28deg);
+    }
+
+    &--fourth {
+      top: 23px;
+      right: -502px;
+      transform: rotate(-11deg);
+    }
+
+    &--fifth {
+      top: -107px;
+      right: -430px;
+      transform: rotate(-27deg);
+    }
+
+    &--sixth {
+      top: -168px;
+      right: -368px;
+      transform: rotate(-38deg);
+    }
+
+    &--active {
       opacity: 1;
       visibility: visible;
+      top: 46px;
+      right: -120px;
+      transform: rotate(0deg);
+      animation: slideFromFirstToActive 3.5s ease-in-out forwards;
     }
+
+    // &--animated {
+    //   top: 190px;
+    //   left: 32px;
+    //   transform: rotate(60deg);
+    //   opacity: 1;
+    //   visibility: visible;
+    // }
   }
 
   &__circle {
@@ -225,7 +283,6 @@
           transform: translateX(-216px);
           transition: transform 0.5s ease-in-out;
         }
-        
       }
 
       &-total {
@@ -271,7 +328,6 @@
     background-color: $color-gray-9;
     color: $color-gray-1;
   }
-
 }
 
 @media screen and (max-width: 1200px) {
