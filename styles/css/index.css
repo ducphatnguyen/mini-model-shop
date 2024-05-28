@@ -1,5 +1,29 @@
 @import url("https://db.onlinewebfonts.com/c/8596a172173e3bf6bf5daba5f15fb488?family=MINI+Serif+Regular");
 @import url("https://db.onlinewebfonts.com/c/a854932970a656a7573f56f61b544ea1?family=MINISansSerif-Regular");
+.fade-in {
+  animation: fadeIn 1s forwards;
+}
+
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 .container {
   position: relative;
   display: flex;
@@ -270,15 +294,6 @@
     padding: 0;
   }
 }
-.fade-in {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.fade-in-active {
-  opacity: 1;
-}
-
 .row {
   display: -ms-flexbox;
   display: flex;

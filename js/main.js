@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
   let isTransitioning = false;
   let previousDisplayIndex = 0;
-  let isFirstRendering = true;
 
   // Utility functions
   const fade = (element, duration, fadeIn = true) => {
@@ -35,7 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateOpacity = () => {
       opacity += fadeIn ? deltaOpacity : -deltaOpacity;
+      // Bug
       element.style.opacity = Math.max(0, Math.min(1, opacity));
+
       if ((fadeIn && opacity < 1) || (!fadeIn && opacity > 0)) {
         setTimeout(updateOpacity, 100);
       }
@@ -75,7 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
       currentIndex !== 0 && currentIndex % initialChildren === 0;
 
     if (prevButton.disabled) {
-      isFirstRendering = false;
       cloneSlides(0, slidesContainer.childElementCount - slidesToShow);
       setTimeout(() => {
         removeClonedSlides();
@@ -99,8 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
       fade(previousProgressSpan, 500, false);
     } else if (
       direction === 1 &&
-      currentIndex % initialChildren === 0 &&
-      !isFirstRendering
+      currentIndex &&
+      currentIndex % initialChildren === 0 
     ) {
       totalProgressSpan.classList.add("progress__position-total--min");
       fade(currentProgressSpan, 500);
@@ -132,12 +132,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentActiveIndex = circles.findIndex((circle) =>
       circle.classList.contains("shop-by-models__circle--active")
     );
+
     if (currentActiveIndex !== -1) {
-      circles[currentActiveIndex].classList.remove(
-        "shop-by-models__circle--active"
-      );
+      fade(circles[currentActiveIndex], 500, false);
+
+      setTimeout(() => {
+        circles[currentActiveIndex].classList.remove(
+          "shop-by-models__circle--active"
+        );
+      }, 500);
+
       const nextActiveIndex =
         (currentActiveIndex + direction + circles.length) % circles.length;
+
+      circles[nextActiveIndex].style.opacity = 1;
       circles[nextActiveIndex].classList.add("shop-by-models__circle--active");
     }
   };
