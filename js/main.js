@@ -93,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const slideWidth = slidesContainer.firstElementChild.clientWidth;
     const offset = (slideWidth + gap) * currentIndex;
     slidesContainer.style.transform = `translateX(${offset}px)`;
-    console.log("Hello");
     handleButtonStates();
     updateProgressBar();
     updateProgressAnimation();
