@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleButtonStates = () => {
     const isAtStart = currentIndex === 0;
     const isAtBoundary = currentIndex % initialChildren === 0;
+
     nextButton.disabled = isAtBoundary;
     prevButton.disabled = !isAtStart && isAtBoundary;
 
@@ -92,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const slideWidth = slidesContainer.firstElementChild.clientWidth;
     const offset = (slideWidth + gap) * currentIndex;
     slidesContainer.style.transform = `translateX(${offset}px)`;
-
+    console.log("Hello");
     handleButtonStates();
     updateProgressBar();
     updateProgressAnimation();
@@ -193,16 +194,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const updateProgressAnimation = () => {
     if (currentIndex % initialChildren === initialChildren - 1) {
+      currProgress.style.transition = "all 0.5s ease";
       currProgress.classList.add("progress__position-current--max");
       fade(totalProgress, 500);
       fade(prevProgress, 500, false);
     } else if (currentIndex % initialChildren === 0) {
+      totalProgress.style.transition = "all 0.5s ease";
       totalProgress.classList.add("progress__position-total--min");
       fade(currProgress, 500);
       prevProgress.textContent = initialChildren;
       prevProgress.classList.add("progress__position-previous--min");
       fade(prevProgress, 500, false);
     } else {
+      totalProgress.style.transition = "";
+      currProgress.style.transition = "";
       prevProgress.classList.remove("progress__position-previous--min");
       currProgress.classList.remove("progress__position-current--max");
       totalProgress.classList.remove("progress__position-total--min");
@@ -236,6 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // *Initial
   cloneSlides(-slidesToShow, slidesContainer.childElementCount);
+  handleButtonStates();
 
   circles[0].style.opacity = 1;
   circles[0].style.visibility = "visible";
